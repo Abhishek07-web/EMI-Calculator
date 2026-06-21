@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EMI Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="container">
+  <h1>EMI Calculator</h1>
+  <p class="subtitle">Plan your loan repayments easily</p>
+
+  <div class="card">
+
+    <label>Loan Amount (₹) <span id="lbl-amount">₹5,00,000</span></label>
+    <input type="range" id="range-amount" min="10000" max="10000000" step="10000" value="500000"
+      oninput="sync('amount', this.value, true)" />
+    <input type="number" id="amount" value="500000" min="10000"
+      oninput="sync('range-amount', this.value, true)" placeholder="Enter loan amount" />
+
+    <label>Annual Interest Rate (%) <span id="lbl-rate">8.5%</span></label>
+    <input type="range" id="range-rate" min="1" max="30" step="0.1" value="8.5"
+      oninput="sync('rate', this.value, false)" />
+    <input type="number" id="rate" value="8.5" min="1" max="30" step="0.1"
+      oninput="sync('range-rate', this.value, false)" placeholder="Enter interest rate" />
+
+    <label>Loan Tenure (Months) <span id="lbl-tenure">60 months</span></label>
+    <input type="range" id="range-tenure" min="6" max="360" step="6" value="60"
+      oninput="sync('tenure', this.value, false)" />
+    <input type="number" id="tenure" value="60" min="6" max="360"
+      oninput="sync('range-tenure', this.value, false)" placeholder="Enter tenure in months" />
+
+    <p class="error" id="error-msg">Please enter valid values in all fields.</p>
+
+    <button class="calc-btn" onclick="calculate()">Calculate EMI</button>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+    <div class="card">
+      <div class="summary-grid">
+        <div class="summary-box highlight">
+          <div class="label">Monthly EMI</div>
+          <div class="value" id="r-emi">—</div>
+        </div>
+        <div class="summary-box">
+          <div class="label">Principal Amount</div>
+          <div class="value" id="r-principal">—</div>
+        </div>
+        <div class="summary-box">
+          <div class="label">Total Interest</div>
+          <div class="value" id="r-interest">—</div>
+        </div>
+        <div class="summary-box" style="grid-column: span 2;">
+          <div class="label">Total Payment</div>
+          <div class="value" id="r-total" style="color:#1a202c;">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p style="font-size:0.85rem; font-weight:700; color:#4a5568; margin-bottom:14px;">
+        Month-by-Month Breakdown
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>EMI (₹)</th>
+              <th>Principal (₹)</th>
+              <th>Interest (₹)</th>
+              <th>Balance (₹)</th>
+            </tr>
+          </thead>
+          <tbody id="schedule-body"></tbody>
+        </table>
+      </div>
+      <button class="reset-btn" onclick="reset()">Reset Calculator</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    Built by <strong>Abhishek Borade</strong> &nbsp;|&nbsp;
+    <a href="mailto:abhishekborade907@gmail.com">abhishekborade907@gmail.com</a>
+  </div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
